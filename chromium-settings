@@ -1,0 +1,5 @@
+# Default settings for chromium-browser. This file is sourced by /bin/sh from
+# /usr/bin/chromium-browser
+
+# Options to pass to chromium-browser
+CHROMIUM_FLAGS="--no-sandbox --user-data-dir=/data --disk-cache-dir=/data --disk-cache-size=100000 --disable-restore-session-state --disable-extensions --disable-plugins-discovery --disable-suggestions-service --disable-sync --disable-translate --disable-session-crashed-bubble --disable-breakpad --no-first-run"
