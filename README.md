@@ -1,5 +1,6 @@
 # docker-chromium-armhf
 Please note that this container is **NOT** stable yet !
+This is a Google Chromium container for Raspberry Pi (armhf)
 
 ## Build
 
