@@ -14,7 +14,7 @@ cd docker-chromium-armhf
 docker build -t teacupx/chromium-armhf .
 ```
 
-### Run the container:
+## Run the container:
 ```
 docker run --privileged -e DISPLAY=unix$DISPLAY \
  -v /tmp/.X11-unix:/tmp/.X11-unix \
