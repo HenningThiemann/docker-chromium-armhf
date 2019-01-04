@@ -16,7 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libsasl2-2 libsasl2-modules-db libsqlite3-0 libtasn1-6 libthai-data libthai0 libtiff5 libwind0-heimdal libx11-6 \
   libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
-  x11-common xdg-utils chromium-browser libpulse0 && apt-get clean
+  x11-common xdg-utils chromium-browser libpulse0 pulseaudio-utils && apt-get clean
+
+
 
 # Add settings
 ADD chromium-settings /etc/chromium-browser/default
@@ -24,12 +26,29 @@ ADD chromium-settings /etc/chromium-browser/default
 # Install Flash, Widevine and Mali support
 ADD packages.tgz /tmp/custompkgs
 RUN dpkg -i /tmp/custompkgs/*.deb
+RUN apt-get -f -y install
 RUN rm -rf /tmp/custompkgs
 
 # Install wrapper
 ADD chromium-streaming /usr/bin/chromium-streaming
 RUN chmod +x /usr/bin/chromium-streaming
 
-ENTRYPOINT [ "/usr/bin/chromium-streaming" ]
+# Copy Pulseaudio config
+COPY pulse-client.conf /etc/pulse/client.conf
+
+# Set up the user
+ENV UNAME mediaguy
+RUN export UNAME=$UNAME UID=1000 GID=1000 && \
+    mkdir -p "/home/${UNAME}" && \
+    echo "${UNAME}:x:${UID}:${GID}:${UNAME} User,,,:/home/${UNAME}:/bin/bash" >> /etc/passwd && \
+    echo "${UNAME}:x:${UID}:" >> /etc/group && \
+    mkdir -p /etc/sudoers.d && \
+    echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${UNAME} && \
+    chmod 0440 /etc/sudoers.d/${UNAME} && \
+    chown ${UID}:${GID} -R /home/${UNAME} && \
+    gpasswd -a ${UNAME} audio
+USER $UNAME
+ENV HOME /home/${UNAME}
 
 CMD [ "" ]
+

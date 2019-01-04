@@ -14,13 +14,11 @@ cd docker-chromium-armhf
 docker build -t teacupx/chromium-armhf .
 ```
 
-## Running
-On the host, you need to allow the docker user access to your local X session
-```
-xhost +local:docker
-```
-If `xhost` is not found, install the `x11-xserver-utils` package.
-
 ### Run the container:
 ```
-docker run --privileged --memory 512mb -e DISPLAY=unix:0.0 -v /tmp/.X11-unix:/tmp/.X11-unix -v /dev/mali0:/host/dev/mali0 -v /dev/fb0:/host/dev/fb0 teacupx/chromium-armhf
+docker run --privileged -e DISPLAY=unix$DISPLAY \
+ -v /tmp/.X11-unix:/tmp/.X11-unix \
+ -v /dev:/dev -v /run:/run \
+ -v /etc/machine-id:/etc/machine-id \
+ teacupx/chromium-armhf chromium-streaming
+```
