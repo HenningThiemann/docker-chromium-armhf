@@ -1,5 +1,5 @@
 # docker-chromium-armhf
-This is a Google Chromium container for any generic armhf device.
+This is a Google Chromium container using the armhf architecture.
 Currently, it provides widevine CDM support, and GPU acceleration, 
 if you can provide the needed debs. Also provides Pulseaudio
 support.
