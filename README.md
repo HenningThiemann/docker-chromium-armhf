@@ -1,7 +1,8 @@
 # docker-chromium-armhf
 This is a Google Chromium container for any generic armhf device.
 Currently, it provides widevine CDM support, and GPU acceleration, 
-if you can provide the needed debs.
+if you can provide the needed debs. Also provides Pulseaudio
+support.
 
 It will look for extra debs to install in a tarball "packages.tgz".
 Please put the tarball file in the same directory as the Dockerfile.
