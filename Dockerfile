@@ -1,10 +1,6 @@
-FROM armv7/armhf-ubuntu
+FROM arm32v7/ubuntu
 
-MAINTAINER Icebob <mereg.norbert@gmail.com>
-
-# Download debs from URL
-ADD https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/7916060/+files/chromium-browser_45.0.2454.85-0ubuntu0.15.04.1.1181_armhf.deb /root/chromium-browser.deb
-ADD https://launchpad.net/~canonical-chromium-builds/+archive/ubuntu/stage/+build/7916060/+files/chromium-codecs-ffmpeg-extra_45.0.2454.85-0ubuntu0.15.04.1.1181_armhf.deb /root/chromium-ffmpeg-extra.deb
+MAINTAINER JMCC <JMCC@locahost>
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -20,10 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libsasl2-2 libsasl2-modules-db libsqlite3-0 libtasn1-6 libthai-data libthai0 libtiff5 libwind0-heimdal libx11-6 \
   libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
-  x11-common xdg-utils
-
-# Install browser
-RUN dpkg -i /root/chromium-ffmpeg-extra.deb /root/chromium-browser.deb
+  x11-common xdg-utils chromium-browser
 
 # Add settings
 ADD chromium-settings /etc/chromium-browser/default
