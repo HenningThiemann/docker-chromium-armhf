@@ -9,7 +9,7 @@ Please put the tarball file in the same directory as the Dockerfile.
 ## Build
 
 ```
-git clone https://github.com/icebob/docker-chromium-armhf
+git clone https://github.com/teacupx/docker-chromium-armhf
 cd docker-chromium-armhf
 docker build -t teacupx/chromium-armhf .
 ```
