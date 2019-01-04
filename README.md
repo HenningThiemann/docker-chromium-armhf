@@ -12,6 +12,7 @@ Please put the tarball file in the same directory as the Dockerfile.
 ```
 git clone https://github.com/teacupx/docker-chromium-armhf
 cd docker-chromium-armhf
+cp /path/to/packages.tgz .
 docker build -t teacupx/chromium-armhf .
 ```
 
