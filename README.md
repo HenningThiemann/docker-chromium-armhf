@@ -33,7 +33,7 @@ Or simply use the script armhf-run:
 sudo install -m 755 armhf-run /usr/local/bin
 armhf-run chromium-streaming
 ```
-Notice that using the wrapper chromium-streaming will make Chromium fail for many pages, like the settings page.
+Notice that using the wrapper chromium-streaming will make Chromium fail for many pages, for example the settings page.
 To prevent this, you can also run the regular chromium-browser:
 ```
 armhf-run chromium-browser
