@@ -4,15 +4,15 @@ Currently, it provides widevine CDM support, and GPU acceleration,
 if you can provide the needed debs. Also provides Pulseaudio
 support.
 
-It will look for extra debs to install in a tarball "packages.tgz".
-Please put the tarball file in the same directory as the Dockerfile.
+It will look for extra debs to install in the directory "packages".
+Please put your chromium-widevine deb into that directory, as well
+as any other extra deb required for GPU acceleration.
 
 ## Build
 
 ```
 git clone https://github.com/teacupx/docker-chromium-armhf
 cd docker-chromium-armhf
-cp /path/to/packages.tgz .
 docker build -t teacupx/chromium-armhf .
 docker volume create chromium_home
 ```

@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ADD chromium-settings /etc/chromium-browser/default
 
 # Install Flash, Widevine and Mali support
-ADD packages.tgz /tmp/custompkgs
+ADD packages/ /tmp/custompkgs
 RUN dpkg -i /tmp/custompkgs/*.deb
 RUN apt-get -f -y install
 RUN rm -rf /tmp/custompkgs
