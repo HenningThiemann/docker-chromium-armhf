@@ -38,3 +38,4 @@ To prevent this, you can also run the regular chromium-browser:
 ```
 armhf-run chromium-browser
 ```
+In the same way, you can run any additional app that you install by putting the debs into the "packages" directory.
