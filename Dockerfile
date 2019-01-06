@@ -50,5 +50,5 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
 USER $UNAME
 ENV HOME /home/${UNAME}
 
-CMD [ "" ]
+CMD [ "chromium-streaming" ]
 
