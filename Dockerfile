@@ -3,6 +3,7 @@ FROM arm32v7/ubuntu
 MAINTAINER JMCC <JMCC@locahost>
 
 # Install dependencies
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
   fontconfig fontconfig-config fonts-dejavu-core gconf-service gconf-service-backend gconf2-common \
   libasn1-8-heimdal libasound2 libasound2-data libatk1.0-0 libatk1.0-data libavahi-client3 libavahi-common-data \
@@ -25,7 +26,7 @@ ADD chromium-settings /etc/chromium-browser/default
 
 # Install Flash, Widevine and Mali support
 ADD packages/ /tmp/custompkgs
-RUN dpkg -i /tmp/custompkgs/*.deb
+RUN dpkg --unpack /tmp/custompkgs/*.deb
 RUN apt-get -f -y install
 RUN rm -rf /tmp/custompkgs
 
