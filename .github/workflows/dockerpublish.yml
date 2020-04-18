@@ -18,7 +18,7 @@ jobs:
           version: latest
 
       - name: Build Docker Image
-        run: docker buildx build --platform linux/arm/v6,linux/arm/v7 --output "type=image,push=false" -t docker-chromium-armhf .
+        run: docker buildx build --platform linux/arm/v6,linux/arm/v7 --output "type=image,push=false" --load -t docker-chromium-armhf .
 
       - name: Tag Docker Image
         run: docker tag docker-chromium-armhf  hthiemann/docker-chromium-armhf

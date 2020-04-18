@@ -26,7 +26,7 @@ docker run --rm --privileged \
  -v /dev:/dev -v /run:/run \
  -v /etc/machine-id:/etc/machine-id \
  --ipc=host
- chromium-armhf \
+ hthiemann/docker-chromium-armhf \
  chromium-streaming
 ```
 Or simply use the script armhf-run:
