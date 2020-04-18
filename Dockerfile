@@ -5,7 +5,7 @@ MAINTAINER JMCC <JMCC@locahost>
 # Install dependencies
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && apt-get install -y --no-install-recommends \
-  fontconfig fontconfig-config fonts-dejavu-core gconf-service gconf-service-backend gconf2-common \
+  git fontconfig fontconfig-config fonts-dejavu-core gconf-service gconf-service-backend gconf2-common \
   libasn1-8-heimdal libasound2 libasound2-data libatk1.0-0 libatk1.0-data libavahi-client3 libavahi-common-data \
   libavahi-common3 libcairo2 libcups2 libdatrie1 libdbus-1-3 libdbus-glib-1-2 libexpat1 libfontconfig1 \
   libfreetype6 libgconf-2-4 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-common libgmp10 libgnome-keyring-common \
