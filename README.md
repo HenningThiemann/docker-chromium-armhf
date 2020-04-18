@@ -11,9 +11,9 @@ as any other extra deb required for GPU acceleration.
 ## Build
 
 ```
-git clone https://github.com/teacupx/docker-chromium-armhf
+git clone
 cd docker-chromium-armhf
-docker build -t teacupx/chromium-armhf .
+docker build -t chromium-armhf .
 docker volume create chromium_home
 ```
 
@@ -25,7 +25,8 @@ docker run --rm --privileged \
  -v /tmp/.X11-unix:/tmp/.X11-unix \
  -v /dev:/dev -v /run:/run \
  -v /etc/machine-id:/etc/machine-id \
- teacupx/chromium-armhf \
+ --ipc=host
+ chromium-armhf \
  chromium-streaming
 ```
 Or simply use the script armhf-run:

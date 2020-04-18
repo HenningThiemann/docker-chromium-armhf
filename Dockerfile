@@ -19,16 +19,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
   x11-common xdg-utils chromium-browser libpulse0 pulseaudio-utils && apt-get clean
 
-
-
 # Add settings
 ADD chromium-settings /etc/chromium-browser/default
 
-# Install Flash, Widevine and Mali support
-ADD packages/ /tmp/custompkgs
-RUN dpkg --unpack /tmp/custompkgs/*.deb
-RUN apt-get -f -y install
-RUN rm -rf /tmp/custompkgs
+# Install Widevine
+ADD update-widevine.sh .
+RUN chmod +x ./update-widevine.sh && ./update-widevine.sh
 
 # Install wrapper
 ADD chromium-streaming /usr/bin/chromium-streaming
