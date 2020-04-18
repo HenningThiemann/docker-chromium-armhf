@@ -16,7 +16,7 @@ jobs:
         with:
           architecture: armv7
           distribution: ubuntu18.04
-            run: |
+          run: |
               uname -a
               docker build -t docker-chromium-armhf .
               docker tag docker-chromium-armhf  hthiemann/docker-chromium-armhf
