@@ -1,52 +1,27 @@
-name: Push to Docker Registry
+name: Upload Image to DockerHub
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
     branches:
       - master
 
-  # Run tests for any PRs.
-  pull_request:
-
-env:
-  # TODO: Change variable to your image's name.
-  IMAGE_NAME: docker-chromium-armhf
-
 jobs:
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
-  push:
+  build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --file Dockerfile --tag image
+      - name: Build Docker Image
+        run: docker build -t docker-chromium-armhf .
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+      - name: Tag Docker Image
+        run: docker tag docker-chromium-armhf  hthiemann/docker-chromium-armhf
 
-      - name: Push image
-        run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
-          
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+      - name: Docker Push
+        run: docker push hthiemann/docker-chromium-armhf
 
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
-
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+      - name: Docker Logout
+        run: docker logout
