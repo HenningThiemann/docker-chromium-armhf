@@ -19,9 +19,11 @@ apt install -qq wget &> /dev/null
 printMsg "To get the latest widevine library we must download the entire 2gb ChromeOS recovery image (will later be deleted). Please be patient, this may take a while..."
 echo
 echo
-CHROMEOS_URL="$(wget -qO- https://dl.google.com/dl/edgedl/chromeos/recovery/recovery.conf | grep -A11 CB5-312T | sed -n 's/^url=//p')"
+CHROMEOS_URL="https://dl.google.com/dl/edgedl/chromeos/recovery/chromeos_12739.111.0_cyan_recovery_stable-channel_mp-v3.bin.zip"
 CHROMEOS_IMG="$(basename "$CHROMEOS_URL" .zip)"
-wget -O - "$CHROMEOS_URL" | zcat > "$CHROMEOS_IMG"
+echo "$CHROMEOS_URL"
+echo "$CHROMEOS_IMG"
+wget -O - "$CHROMEOS_URL" --no-check-certificate | zcat > "$CHROMEOS_IMG"
 
 printMsg "Mounting the image to pull the files from it..."
 mkdir -p chromeos_tmp
@@ -39,6 +41,6 @@ losetup -d "$LOOPDEV"
 rm -f "$CHROMEOS_IMG"
 rm -fr chromeos_tmp
 
-printMsg "WIDevine Updater Completed"
+printMsg "Widevine Updater Completed"
 sleep 5
 
