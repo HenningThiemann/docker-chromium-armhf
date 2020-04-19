@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ADD chromium-settings /etc/chromium-browser/default
 
 # Install Widevine
+USER root
 ADD update-widevine.sh .
 RUN chmod +x ./update-widevine.sh && ./update-widevine.sh
 

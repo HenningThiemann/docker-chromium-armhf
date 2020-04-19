@@ -17,20 +17,11 @@ jobs:
         with:
           version: latest
 
-      - name: Build Docker Image
-        run: docker buildx build --platform linux/arm/v6,linux/arm/v7 --output "type=image,push=false" --load -t docker-chromium-armhf .
-
-      - name: List Docker Images
-        run: docker images
-
-      - name: Tag Docker Image
-        run: docker tag docker-chromium-armhf  hthiemann/docker-chromium-armhf
-
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Docker Push
-        run: docker push hthiemann/docker-chromium-armhf
+      - name: Build Docker Image
+        run: docker buildx build --platform linux/arm/v7 --push -t hthiemann/docker-chromium-armhf .
 
       - name: Docker Logout
         run: docker logout
