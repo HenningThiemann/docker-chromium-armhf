@@ -25,7 +25,10 @@ ADD chromium-settings /etc/chromium-browser/default
 # Install Widevine
 USER root
 ADD update-widevine.sh .
-RUN chmod +x ./update-widevine.sh && ./update-widevine.sh
+#RUN chmod +x ./update-widevine.sh && ./update-widevine.sh
+ADD widevine/libwidevinecdm.so /usr/lib/chromium-browser
+ADD widevine/PepperFlash /usr/lib/chromium-browser/pepper
+
 
 # Install wrapper
 ADD chromium-streaming /usr/bin/chromium-streaming

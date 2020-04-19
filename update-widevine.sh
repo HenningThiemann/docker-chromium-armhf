@@ -25,6 +25,9 @@ echo "$CHROMEOS_URL"
 echo "$CHROMEOS_IMG"
 wget -O - "$CHROMEOS_URL" --no-check-certificate | zcat > "$CHROMEOS_IMG"
 
+ls
+pwd
+
 printMsg "Mounting the image to pull the files from it..."
 mkdir -p chromeos_tmp
 LOOPDEV="$(losetup -f)"

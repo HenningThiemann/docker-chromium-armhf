@@ -25,7 +25,7 @@ docker run --rm --privileged \
  -v /tmp/.X11-unix:/tmp/.X11-unix \
  -v /dev:/dev -v /run:/run \
  -v /etc/machine-id:/etc/machine-id \
- --ipc=host
+ --ipc=host \
  hthiemann/docker-chromium-armhf \
  chromium-streaming
 ```
