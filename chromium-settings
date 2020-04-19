@@ -12,7 +12,6 @@ CHROMIUM_FLAGS="$CHROMIUM_FLAGS \
 --flag-switches-begin \
 --enable-gpu-rasterization \
 --enable-oop-rasterization \
---flag-switches-end
 --no-sandbox \
 --test-type \
 --show-component-extension-options \
