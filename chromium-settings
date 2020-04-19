@@ -1,11 +1,18 @@
 # Default settings for chromium-browser. This file is sourced by /bin/sh from /usr/bin/chromium-browser
 CHROMIUM_FLAGS="$CHROMIUM_FLAGS \
 --disable-low-res-tiling \
---num-raster-threads=4 \
 --profiler-timing=0 \
 --disable-composited-antialiasing \
 --disk-cache-dir=/tmp/${USER}-cache \
 --disk-cache-size=100M \
+--num-raster-threads=6 \
+--ppapi-flash-path=/usr/lib/chromium-browser/pepper/libpepflashplayer.so \
+--ppapi-flash-version=32.0.0.255 \
+--enable-pinch \
+--flag-switches-begin \
+--enable-gpu-rasterization \
+--enable-oop-rasterization \
+--flag-switches-end
 --no-sandbox \
 --test-type \
 --show-component-extension-options \

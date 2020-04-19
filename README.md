@@ -18,6 +18,11 @@ docker volume create chromium_home
 ```
 
 ## Run the container:
+You need to enabel xhost forwarding first:
+```
+xhost +local:docker
+```
+
 ```
 docker run --rm --privileged \
  -e DISPLAY=unix$DISPLAY \
