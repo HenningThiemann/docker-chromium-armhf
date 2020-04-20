@@ -1,5 +1,5 @@
 FROM arm32v7/debian
-MAINTAINER JMCC <JMCC@locahost>
+MAINTAINER Henning Thiemann <henning.thiemann@gmail.com>
 
 # Install dependencies
 ENV DEBIAN_FRONTEND noninteractive
@@ -16,9 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libsasl2-2 libsasl2-modules-db libsqlite3-0 libtasn1-6 libthai-data libthai0 libtiff5 libwind0-heimdal libx11-6 \
   libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
-  x11-common xdg-utils libpulse0 pulseaudio-utils wget libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0
+  x11-common xdg-utils libpulse0 pulseaudio-utils wget libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libosmesa6 libgles2-mesa libegl1-mesa
 
-# Add dependencies
+# Add chromium dependencies
 ADD dependencies/chromium-browser_78.0.3904.97-0ubuntu0.16.04.1_armhf.deb chromium-browser.deb
 ADD dependencies/chromium-codecs-ffmpeg-extra_78.0.3904.97-0ubuntu0.16.04.1_armhf.deb chromium-codecs.deb
 RUN echo "Updating Chromium..." && dpkg -i chromium-codecs.deb && dpkg -i chromium-browser.deb
@@ -27,14 +27,8 @@ RUN echo "Updating Chromium..." && dpkg -i chromium-codecs.deb && dpkg -i chromi
 ADD chromium-settings /etc/chromium-browser/default
 
 # Install Widevine
-USER root
 ADD widevine/libwidevinecdm.so /usr/lib/chromium-browser
-RUN chmod 755 /usr/lib/chromium-browser/libwidevinecdm.so
 ADD widevine/PepperFlash /usr/lib/chromium-browser/pepper
-
-# Install wrapper
-ADD chromium-streaming /usr/bin/chromium-streaming
-RUN chmod +x /usr/bin/chromium-streaming
 
 # Copy Pulseaudio config
 COPY pulse-client.conf /etc/pulse/client.conf
@@ -53,5 +47,5 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
 USER $UNAME
 ENV HOME /home/${UNAME}
 
-CMD [ "chromium-streaming" ]
+CMD ["/usr/bin/chromium-browser", "--user-agent='Mozilla/5.0 (X11; CrOS armv7l 6946.63.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36'"]
 

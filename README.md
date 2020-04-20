@@ -1,20 +1,13 @@
 # docker-chromium-armhf
 This is a Google Chromium container using the armhf architecture.
-Currently, it provides widevine CDM support, and GPU acceleration, 
-if you can provide the needed debs. Also provides Pulseaudio
-support.
-
-It will look for extra debs to install in the directory "packages".
-Please put your chromium-widevine deb into that directory, as well
-as any other extra deb required for GPU acceleration.
+Currently, it provides widevine CDM support.
 
 ## Build
-
+To build the application, you have to clone it first,
 ```
 git clone
 cd docker-chromium-armhf
-docker build -t chromium-armhf .
-docker volume create chromium_home
+docker build -t hthiemann/chromium-armhf .
 ```
 
 ## Run the container:
@@ -22,8 +15,16 @@ You need to enabel xhost forwarding first:
 ```
 xhost +local:docker
 ```
+If the xhost command can not be found, make sure to install it first (on manjaro, the required package is 'xorg-xhost').
 
+Although not required, it is recommended to save chromium settings in a volume, to make it persistent through container restarts.
 ```
+docker volume create chromium_home
+``` 
+After creating the volume, you can run the image using the following command:
+```
+docker pull hthiemann/docker-chromium-armhf
+
 docker run --rm --privileged \
  -e DISPLAY=unix$DISPLAY \
  -v chromium_home:/home \
@@ -31,17 +32,10 @@ docker run --rm --privileged \
  -v /dev:/dev -v /run:/run \
  -v /etc/machine-id:/etc/machine-id \
  --ipc=host \
- hthiemann/docker-chromium-armhf \
- chromium-streaming
+ hthiemann/docker-chromium-armhf
 ```
-Or simply use the script armhf-run:
+Or simply use the script chromium-armhf:
 ```
-sudo install -m 755 armhf-run /usr/local/bin
-armhf-run chromium-streaming
+sudo install -m 755 chromium-armhf /usr/local/bin
+chromium-armhf
 ```
-Notice that using the wrapper chromium-streaming will make Chromium fail for many pages, for example the settings page.
-To prevent this, you can also run the regular chromium-browser:
-```
-armhf-run chromium-browser
-```
-In the same way, you can run any additional app that you install by putting the debs into the "packages" directory.

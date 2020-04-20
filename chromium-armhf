@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+echo "Enabling XHost Forwarding"
+xhost +local:docker
+
 echo "Searching for Docker image ..."
-DOCKER_IMAGE_ID=$(docker images -q teacupx/chromium-armhf:latest | head -n 1)
+DOCKER_IMAGE_ID=$(docker images -q hthiemann/chromium-armhf:latest | head -n 1)
 echo "Found and using ${DOCKER_IMAGE_ID}"
 
 docker run --rm --privileged \
@@ -10,10 +13,5 @@ docker run --rm --privileged \
  -v /tmp/.X11-unix:/tmp/.X11-unix \
  -v /dev:/dev -v /run:/run \
  -v /etc/machine-id:/etc/machine-id \
-  ${DOCKER_IMAGE_ID} \
-  ${@}
-
-#LATEST_IMAGE_ID=$(docker ps -l -q | head -n 1)
-
-#echo "Comitting changes to image ${LATEST_IMAGE_ID}"
-#docker commit ${LATEST_IMAGE_ID} teacupx/chromium-armhf
+ --ipc=host \
+  ${DOCKER_IMAGE_ID}
