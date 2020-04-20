@@ -39,3 +39,7 @@ Or simply use the script chromium-armhf:
 sudo install -m 755 chromium-armhf /usr/local/bin
 chromium-armhf
 ```
+
+## Known Bugs
+- HW accelaration not working (check chrome://gpu)
+- Settings Tab crashed directly after loading
