@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libsasl2-2 libsasl2-modules-db libsqlite3-0 libtasn1-6 libthai-data libthai0 libtiff5 libwind0-heimdal libx11-6 \
   libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
-  x11-common xdg-utils libpulse0 pulseaudio-utils wget libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 libosmesa6 libgles2-mesa libegl1-mesa
+  x11-common xdg-utils libpulse0 pulseaudio-utils wget libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 mesa-utils mesa-utils-extra
 
 # Add chromium dependencies
 ADD dependencies/chromium-browser_78.0.3904.97-0ubuntu0.16.04.1_armhf.deb chromium-browser.deb

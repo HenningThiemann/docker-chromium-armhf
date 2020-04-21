@@ -32,6 +32,8 @@ docker run --rm --privileged \
  -v /dev:/dev -v /run:/run \
  -v /etc/machine-id:/etc/machine-id \
  --ipc=host \
+ --device /dev/dri \
+ --group-add video \
  hthiemann/docker-chromium-armhf
 ```
 Or simply use the script chromium-armhf:

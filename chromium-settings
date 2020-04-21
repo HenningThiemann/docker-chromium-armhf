@@ -3,6 +3,7 @@
 CHROMIUM_FLAGS="$CHROMIUM_FLAGS \
 --disable-low-res-tiling \
 --num-raster-threads=6 \
+--enable-webgl \
 --profiler-timing=0 \
 --disable-composited-antialiasing \
 --test-type \
