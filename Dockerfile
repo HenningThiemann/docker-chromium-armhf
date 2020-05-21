@@ -32,7 +32,7 @@ ADD widevine/libwidevinecdm.so /usr/lib/chromium-browser
 ADD widevine/PepperFlash /usr/lib/chromium-browser/pepper
 
 # Install Netflix 1080P Extension
-ADD widevine/netflix-1080p-1.19 /usr/lib/chromium-browser/netflix-1080p
+ADD widevine/netflix-1080p-1.20.1 /usr/lib/chromium-browser/netflix-1080p
 
 # Copy Pulseaudio config
 COPY pulse-client.conf /etc/pulse/client.conf

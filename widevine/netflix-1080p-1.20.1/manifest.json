@@ -1,0 +1,46 @@
+{
+  "manifest_version": 2,
+  "name": "Netflix 1080p",
+  "description": "Forces 1080p and 5.1 playback for Netflix.",
+  "version": "1.20.1",
+  "author": "truedread",
+  "browser_action": {
+    "default_icon": "img/icon128.png"
+  },
+  "icons": {
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [{
+    "matches": [
+      "*://assets.nflxext.com/*/ffe/player/html/*",
+      "*://www.assets.nflxext.com/*/ffe/player/html/*",
+      "*://netflix.com/*",
+      "*://www.netflix.com/*"
+    ],
+    "all_frames": true,
+    "js": ["content_script.js"],
+    "run_at": "document_start"
+  }],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_ui": {
+    "page": "pages/options.html",
+    "open_in_tab": false
+  },
+  "web_accessible_resources": [
+    "msl_client.js",
+    "netflix_max_bitrate.js",
+    "cadmium-playercore-6.0023.327.011-1080p.js"
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://assets.nflxext.com/*/ffe/player/html/*",
+    "*://www.assets.nflxext.com/*/ffe/player/html/*",
+    "*://netflix.com/*",
+    "*://www.netflix.com/*"
+  ]
+}
