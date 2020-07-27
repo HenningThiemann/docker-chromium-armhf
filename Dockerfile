@@ -1,4 +1,4 @@
-FROM docker.io/arm32v7/debian:unstable
+FROM docker.io/arm32v7/debian:stable
 MAINTAINER Henning Thiemann <henning.thiemann@gmail.com>
 
 # Install dependencies
