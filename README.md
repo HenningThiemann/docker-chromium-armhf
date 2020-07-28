@@ -20,7 +20,7 @@ If the xhost command can not be found, make sure to install it first (on manjaro
 
 Although not required, it is recommended to save chromium settings in a volume, to make it persistent through container restarts.
 ```
-docker volume create chromium_home
+sudo docker volume create chromium_home
 ``` 
 After creating the volume, you can run the image using the following command:
 ```
