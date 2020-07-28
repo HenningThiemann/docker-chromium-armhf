@@ -24,7 +24,7 @@ sudo docker volume create chromium_home
 ``` 
 After creating the volume, you can run the image using the following command:
 ```
-docker pull hthiemann/docker-chromium-armhf
+sudo docker pull hthiemann/docker-chromium-armhf
 
 docker run --rm --privileged \
  -e DISPLAY=unix$DISPLAY \
