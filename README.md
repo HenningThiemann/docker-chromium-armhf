@@ -5,6 +5,7 @@ Currently, it provides widevine CDM support.
 ## Build
 To build the application, you have to clone it first,
 ```
+sudo apt install docker docker.io
 git clone
 cd docker-chromium-armhf
 docker build -t hthiemann/chromium-armhf .
