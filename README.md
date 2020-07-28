@@ -27,20 +27,7 @@ After creating the volume, you can run the image using the following command:
 sudo docker pull hthiemann/docker-chromium-armhf
 
 ```
-sudo docker run --rm --privileged \
- -e DISPLAY=unix$DISPLAY \
- -v chromium_home:/home \
- -v /tmp/.X11-unix:/tmp/.X11-unix \
- -v /dev:/dev -v /run:/run \
- -v /etc/machine-id:/etc/machine-id \
- --ipc=host \
- --device /dev/dri \
- --group-add video \
- hthiemann/docker-chromium-armhf
-sudo install -m 755 chromium-armhf /usr/local/bin
-chromium-armhf
-```
+sudo cp chromium-armhf /usr/local/bin
+sudo chromium-armhf
 
-## Known Bugs
-- HW accelaration not working (check chrome://gpu)
-- Settings Tab crashed directly after loading
+```
