@@ -1,5 +1,5 @@
-FROM docker.io/arm32v7/debian:unstable
-MAINTAINER Henning Thiemann <henning.thiemann@gmail.com>
+FROM docker.io/arm32v7/ubuntu:bionic
+MAINTAINER Furkan Kardame <furkan@fkardame.com>
 
 # Install dependencies
 ENV DEBIAN_FRONTEND noninteractive
@@ -20,8 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   mesa-va-drivers mesa-vdpau-drivers mesa-utils libosmesa6 libegl1-mesa libwayland-egl1-mesa libgl1-mesa-dri
 
 # Add chromium dependencies
-ADD dependencies/chromium-browser_78.0.3904.97-0ubuntu0.16.04.1_armhf.deb chromium-browser.deb
-ADD dependencies/chromium-codecs-ffmpeg-extra_78.0.3904.97-0ubuntu0.16.04.1_armhf.deb chromium-codecs.deb
+ADD dependencies/chromium-browser_84.0.4147.105-0ubuntu0.18.04.1_armhf.deb chromium-browser.deb
+ADD dependencies/chromium-codecs-ffmpeg-extra_84.0.4147.105-0ubuntu0.18.04.1_armhf.deb chromium-codecs.deb
 RUN echo "Updating Chromium..." && dpkg -i chromium-codecs.deb && dpkg -i chromium-browser.deb
 
 # Add settings
