@@ -1,5 +1,5 @@
-FROM docker.io/arm32v7/debian:unstable
-MAINTAINER Henning Thiemann <henning.thiemann@gmail.com>
+FROM docker.io/arm32v7/ubuntu:bionic
+MAINTAINER Furkan Kardame <furkan@fkardame.com>
 
 # Install dependencies
 ENV DEBIAN_FRONTEND noninteractive
@@ -31,6 +31,9 @@ RUN echo "Updating Chromium..." && dpkg -i chromium-codecs.deb && dpkg -i chromi
 ADD widevine/libwidevinecdm.so /usr/lib/chromium-browser
 ADD widevine/PepperFlash /usr/lib/chromium-browser/pepper
 
+# Install Netflix 1080P Extension
+ADD widevine/netflix-1080p-1.20.1 /usr/lib/chromium-browser/netflix-1080p
+
 # Copy Pulseaudio config
 COPY pulse-client.conf /etc/pulse/client.conf
 
@@ -48,5 +51,4 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
 USER $UNAME
 ENV HOME /home/${UNAME}
 
-CMD ["/usr/bin/chromium-browser", "--user-agent='Mozilla/5.0 (X11; CrOS armv7l 6946.63.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36'"]
-
+CMD ["/usr/bin/chromium-browser", "--user-agent='Mozilla/5.0 (X11; CrOS armv7l 12607.82.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.123 Safari/537.36'"]

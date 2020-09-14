@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo "Set host IP for Pulseaudio"
+addrip="$(hostname -i | grep -v '127.0.0.1' | awk '{ print $1}')"
+
 echo "Enabling XHost Forwarding"
 xhost +local:docker
 
@@ -9,6 +12,8 @@ echo "Found and using ${DOCKER_IMAGE_ID}"
 
 docker run --rm --privileged \
  -e DISPLAY=unix$DISPLAY \
+ -e PULSE_SERVER=tcp:${addrip}:4713 \
+ -e PULSE_COOKIE_DATA=`pax11publish -d | grep --color=never -Po '(?<=^Cookie: ).*'` \
  -v chromium_home:/home \
  -v /tmp/.X11-unix:/tmp/.X11-unix \
  -v /dev:/dev -v /run:/run \
