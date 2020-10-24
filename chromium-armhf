@@ -6,6 +6,14 @@ addrip="$(docker network inspect bridge --format='{{(index .IPAM.Config 0).Gatew
 echo "Enabling XHost Forwarding"
 xhost +local:docker
 
+if pacmd list-modules|grep native-protocol-tcp >/dev/null;then
+  echo Pulseaudio native-protocol-tcp Checked
+else
+  echo Loading Pulseaudio native-protocol-tcp module
+  pacmd load-module module-native-protocol-tcp
+  echo Pulseaudio native-protocol-tcp Loaded
+fi
+
 echo "Searching for Docker image ..."
 DOCKER_IMAGE_ID=$(docker images -q hthiemann/chromium-armhf:latest | head -n 1)
 echo "Found and using ${DOCKER_IMAGE_ID}"
