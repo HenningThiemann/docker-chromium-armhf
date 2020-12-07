@@ -48,5 +48,5 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
 USER $UNAME
 ENV HOME /home/${UNAME}
 
-CMD ["/usr/bin/chromium-browser", "--user-agent='Mozilla/5.0 (X11; CrOS armv7l 6946.63.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36'"]
+CMD ["/usr/bin/chromium-browser", "--user-agent='Mozilla/5.0 (X11; CrOS armv7l 6946.63.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.54 Safari/537.36'"]
 
