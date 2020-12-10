@@ -5,7 +5,7 @@ Currently, it provides widevine CDM support.
 ## Build
 To build the application, you have to clone it first,
 ```
-sudo apt install docker docker.io
+sudo apt install docker docker.io pulseaudio-utils
 git clone https://github.com/monkaBlyat/docker-chromium-armhf
 cd docker-chromium-armhf
 sudo docker build -t hthiemann/chromium-armhf .
