@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Set host IP for Pulseaudio"
-addrip="$(hostname -i | grep -v '127.0.0.1' | awk '{ print $1}')"
+addrip="$(docker network inspect bridge --format='{{(index .IPAM.Config 0).Gateway}}')"
 
 echo "Enabling XHost Forwarding"
 xhost +local:docker
