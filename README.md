@@ -26,5 +26,6 @@ After creating the volume, you can run the image using the following command:
 ```
 sudo docker pull hthiemann/docker-chromium-armhf
 sudo cp chromium-armhf /usr/local/bin
-sudo chromium-armhf
+sudo usermod -aG docker $(whoami)
+chromium-armhf
 
