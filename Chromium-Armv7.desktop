@@ -7,5 +7,5 @@ Exec=sudo /usr/local/bin/chromium-armhf
 Name=Chromium Docker
 GenericName=Web Browser
 Comment=Browser for Netflix, Amazon and Spotify
-Icon=/usr/share/chromium-docker/chromium.png
+Icon=/home/pi/.themes/chromium.jpg
 Categories=Network;WebBrowser;
