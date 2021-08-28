@@ -1,4 +1,4 @@
-FROM docker.io/arm32v7/ubuntu:bionic
+FROM docker.io/arm32v7/ubuntu:hirsute
 MAINTAINER Furkan Kardame <furkan@fkardame.com>
 
 # Install dependencies
@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
   x11-common xdg-utils libpulse0 pulseaudio-utils wget libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 \
-  mesa-va-drivers mesa-vdpau-drivers mesa-utils libosmesa6 libegl1-mesa libwayland-egl1-mesa libgl1-mesa-dri
+  mesa-va-drivers mesa-vdpau-drivers mesa-utils libosmesa6 libegl1-mesa libwayland-egl1-mesa libgl1-mesa-dri \
+  && apt-get clean
 
 # Add chromium dependencies
 ADD dependencies/chromium-browser_78.0.3904.97-0ubuntu0.16.04.1_armhf.deb chromium-browser.deb
