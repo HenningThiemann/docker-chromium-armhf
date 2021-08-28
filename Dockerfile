@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
   x11-common xdg-utils libpulse0 pulseaudio-utils wget libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 \
   mesa-va-drivers mesa-vdpau-drivers mesa-utils libosmesa6 libegl1-mesa libwayland-egl1-mesa libgl1-mesa-dri \
+  mesa-utils-extra libegl-mesa0 \
   && apt-get clean
 
 # Add chromium dependencies
@@ -26,7 +27,7 @@ ADD dependencies/chromium-codecs-ffmpeg-extra_78.0.3904.97-0ubuntu0.16.04.1_armh
 RUN echo "Updating Chromium..." && dpkg -i chromium-codecs.deb && dpkg -i chromium-browser.deb
 
 # Add settings
-#ADD chromium-settings /etc/chromium-browser/default
+ADD chromium-settings /etc/chromium-browser/default
 
 # Install Widevine
 ADD widevine/libwidevinecdm.so /usr/lib/chromium-browser
@@ -51,5 +52,7 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
     gpasswd -a ${UNAME} audio
 USER $UNAME
 ENV HOME /home/${UNAME}
+
+ENV PAN_MESA_DEBUG=bifrost
 
 CMD ["/usr/bin/chromium-browser", "--user-agent='Mozilla/5.0 (X11; CrOS armv7l 12607.82.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.123 Safari/537.36'"]
