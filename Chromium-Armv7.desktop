@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=true
+Exec=sudo /usr/local/bin/chromium-armhf
+Name=Chromium Docker
+GenericName=Web Browser
+Comment=Browser for Netflix, Amazon and Spotify
+Icon=/home/pi/.themes/chromium.jpg
+Categories=Network;WebBrowser;

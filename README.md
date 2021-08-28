@@ -1,6 +1,7 @@
 # docker-chromium-armhf
 This is a Google Chromium container using the armhf architecture.
 Currently, it provides widevine CDM support.
+If this is being run on arm64 host with bifrost/panfrost support or later, GPU acceleration is now working!
 
 ## Build
 To build the application, you have to clone it first,
@@ -43,5 +44,5 @@ chromium-armhf
 ```
 
 ## Known Bugs
-- HW accelaration not working (check chrome://gpu)
+- pulseaudio now broken
 - Settings Tab crashed directly after loading

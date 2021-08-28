@@ -17,4 +17,8 @@ CHROMIUM_FLAGS="$CHROMIUM_FLAGS \
 --enable-gpu-rasterization \
 --enable-oop-rasterization \
 --flag-switches-end \
+--enable-features=VaapiVideoDecoder \
+--enable-features=UseOzonePlatform \
+--disable-seccomp-filter-sandbox \
+--no-sandbox \
 --load-extension=/usr/lib/chromium-browser/netflix-1080p"

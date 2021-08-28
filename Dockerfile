@@ -1,4 +1,4 @@
-FROM docker.io/arm32v7/ubuntu:bionic
+FROM docker.io/arm32v7/ubuntu:hirsute
 MAINTAINER Furkan Kardame <furkan@fkardame.com>
 
 # Install dependencies
@@ -9,15 +9,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libavahi-common3 libcairo2 libcups2 libdatrie1 libdbus-1-3 libdbus-glib-1-2 libexpat1 libfontconfig1 \
   libfreetype6 libgconf-2-4 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-common libgmp10 \
   libgnutls30 libgraphite2-3 libgssapi-krb5-2 libgssapi3-heimdal libgtk2.0-0 \
-  libgtk2.0-common libharfbuzz0b libhcrypto4-heimdal libheimbase1-heimdal libheimntlm0-heimdal libhogweed4 \
+  libgtk2.0-common libharfbuzz0b libhcrypto4-heimdal libheimbase1-heimdal libheimntlm0-heimdal libhogweed6 \
   libhx509-5-heimdal libjbig0 libk5crypto3 libkeyutils1 \
-  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle6 libnspr4 libnss3 \
+  libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2 libnettle8 libnspr4 libnss3 \
   libp11-kit0 libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0 libpixman-1-0 libpng16-16 libroken18-heimdal \
   libsasl2-2 libsasl2-modules-db libsqlite3-0 libtasn1-6 libthai-data libthai0 libtiff5 libwind0-heimdal libx11-6 \
   libx11-data libxau6 libxcb-render0 libxcb-shm0 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxdmcp6 \
   libxext6 libxfixes3 libxi6 libxinerama1 libxml2 libxrandr2 libxrender1 libxss1 libxtst6 shared-mime-info ucf \
   x11-common xdg-utils libpulse0 pulseaudio-utils wget libatk-bridge2.0-0 libatspi2.0-0 libgtk-3-0 \
-  mesa-va-drivers mesa-vdpau-drivers mesa-utils libosmesa6 libegl1-mesa libwayland-egl1-mesa libgl1-mesa-dri
+  mesa-va-drivers mesa-vdpau-drivers mesa-utils libosmesa6 libegl1-mesa libwayland-egl1-mesa libgl1-mesa-dri \
+  mesa-utils-extra libegl-mesa0 \
+  && apt-get clean
 
 # Add chromium dependencies
 ADD dependencies/chromium-browser_78.0.3904.97-0ubuntu0.16.04.1_armhf.deb chromium-browser.deb
@@ -25,7 +27,7 @@ ADD dependencies/chromium-codecs-ffmpeg-extra_78.0.3904.97-0ubuntu0.16.04.1_armh
 RUN echo "Updating Chromium..." && dpkg -i chromium-codecs.deb && dpkg -i chromium-browser.deb
 
 # Add settings
-#ADD chromium-settings /etc/chromium-browser/default
+ADD chromium-settings /etc/chromium-browser/default
 
 # Install Widevine
 ADD widevine/libwidevinecdm.so /usr/lib/chromium-browser
@@ -50,5 +52,7 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
     gpasswd -a ${UNAME} audio
 USER $UNAME
 ENV HOME /home/${UNAME}
+
+ENV PAN_MESA_DEBUG=bifrost
 
 CMD ["/usr/bin/chromium-browser", "--user-agent='Mozilla/5.0 (X11; CrOS armv7l 12607.82.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.123 Safari/537.36'"]
